@@ -1,0 +1,74 @@
+[
+  {
+    "id": "m1",
+    "emoji": "🐟",
+    "name": "Poisson du jour",
+    "category": "Grillades",
+    "price": "",
+    "description": "Sélection du matin · grillé aux herbes fraîches",
+    "available": true
+  },
+  {
+    "id": "m2",
+    "emoji": "🐠",
+    "name": "Daurade royale",
+    "category": "Grillades",
+    "price": "",
+    "description": "Entière au four ou grillée · notre spécialité",
+    "available": true
+  },
+  {
+    "id": "m3",
+    "emoji": "🦑",
+    "name": "Calamar grillé",
+    "category": "Grillades",
+    "price": "",
+    "description": "Mariné · sauce chermoula maison",
+    "available": true
+  },
+  {
+    "id": "m4",
+    "emoji": "🦞",
+    "name": "Homard braisé",
+    "category": "Fruits de mer",
+    "price": "",
+    "description": "Crustacé vivant · préparé à la commande",
+    "available": true
+  },
+  {
+    "id": "m5",
+    "emoji": "🦐",
+    "name": "Crevettes royales",
+    "category": "Fruits de mer",
+    "price": "",
+    "description": "Sautées à l'ail · ou grillées",
+    "available": true
+  },
+  {
+    "id": "m6",
+    "emoji": "🦀",
+    "name": "Étrilles fraîches",
+    "category": "Fruits de mer",
+    "price": "",
+    "description": "De Nabeul · vapeur ou en sauce",
+    "available": true
+  },
+  {
+    "id": "m7",
+    "emoji": "🫙",
+    "name": "Salade méchouia",
+    "category": "Accompagnements",
+    "price": "",
+    "description": "Poivrons rôtis · tomates · harissa maison",
+    "available": true
+  },
+  {
+    "id": "m8",
+    "emoji": "🍋",
+    "name": "Mezze maison",
+    "category": "Accompagnements",
+    "price": "",
+    "description": "Houmous · zaalouk · pain maison chaud",
+    "available": true
+  }
+]

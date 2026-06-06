@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Réservation confirmée — Edlala{% endblock %}
+{% block content %}
+<div style="min-height:80vh;display:flex;align-items:center;justify-content:center;padding:8rem 2rem 4rem">
+  <div style="max-width:540px;width:100%;text-align:center">
+    <div style="font-size:4rem;margin-bottom:1.5rem;animation:bounce 1s ease-in-out">✅</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;color:var(--white);margin-bottom:.5rem">
+      Demande envoyée !
+    </h1>
+    <p style="font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem">
+      Référence : #{{ resa.id }}
+    </p>
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:2rem;margin-bottom:2rem;text-align:left">
+      {% for label, val in [
+        ('Nom',resa.nom),('Téléphone',resa.tel),
+        ('Date',resa.date),('Heure',resa.heure),
+        ('Personnes',resa.personnes ~ ' personne(s)'),
+      ] %}
+      <div style="display:flex;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid rgba(245,240,232,.07)">
+        <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.4)">{{ label }}</span>
+        <span style="font-size:.9rem;color:var(--cream);font-weight:500">{{ val }}</span>
+      </div>
+      {% endfor %}
+      {% if resa.message %}
+      <div style="padding:.6rem 0">
+        <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.4)">Message</span>
+        <p style="font-size:.85rem;color:rgba(245,240,232,.6);margin-top:.3rem">{{ resa.message }}</p>
+      </div>
+      {% endif %}
+    </div>
+    <p style="font-size:.88rem;color:rgba(245,240,232,.5);line-height:1.7;margin-bottom:2rem">
+      Nous vous confirmerons votre réservation par téléphone sous 24h.<br>
+      En cas d'urgence : <a href="tel:25035034" style="color:var(--gold)">25 035 034</a>
+    </p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="{{ url_for('index') }}" class="btn-primary">← Retour à l'accueil</a>
+      <a href="{{ url_for('menu') }}" class="btn-outline">Voir le menu</a>
+    </div>
+  </div>
+</div>
+<style>@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}</style>
+{% endblock %}

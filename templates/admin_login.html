@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin — Edlala</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0d1f3c;--orange:#d4571f;--gold:#c8a96e;--cream:#f5f0e8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--cream);
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);
+  border-radius:4px;padding:3rem 2.5rem;width:100%;max-width:380px;text-align:center}
+.logo{font-size:3rem;margin-bottom:1rem;animation:lf 3s ease-in-out infinite}
+@keyframes lf{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+h1{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;margin-bottom:.3rem}
+.sub{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:2rem}
+.fg{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem;text-align:left}
+.fg label{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.fg input{background:rgba(255,255,255,.07);border:1px solid rgba(245,240,232,.14);border-radius:2px;
+  padding:.75rem 1rem;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:.9rem;
+  outline:none;transition:border-color .25s;width:100%}
+.fg input:focus{border-color:var(--orange)}
+.btn{width:100%;background:var(--orange);color:white;padding:.85rem;border:none;border-radius:2px;
+  font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;cursor:pointer;transition:background .3s;margin-top:.5rem;
+  box-shadow:0 4px 18px rgba(212,87,31,.3)}
+.btn:hover{background:#e8743e}
+.flash{padding:.7rem 1rem;border-radius:2px;font-size:.8rem;margin-bottom:1rem;text-align:left}
+.flash.error{background:#3d1a1a;color:#e89090;border-left:2px solid #c04040}
+.back{display:block;margin-top:1.5rem;font-size:.75rem;color:rgba(245,240,232,.35);text-decoration:none}
+.back:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="login-box">
+  <div class="logo">🐟</div>
+  <h1>Espace Admin</h1>
+  <p class="sub">Edlala · الدلالة</p>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for cat,msg in messages %}
+    <div class="flash {{cat}}">{{ msg }}</div>
+    {% endfor %}
+  {% endwith %}
+  <form method="POST">
+    <div class="fg">
+      <label>Mot de passe</label>
+      <input type="password" name="password" placeholder="••••••••••" autofocus required>
+    </div>
+    <button type="submit" class="btn">Se connecter</button>
+  </form>
+  <a href="/" class="back">← Retour au site</a>
+</div>
+</body>
+</html>
