@@ -6,6 +6,8 @@
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
+const RESTAURANT_WHATSAPP = '21625035034'; // format international sans le +
+
 /* ---------- Header scroll state + progress bar ---------- */
 const header = document.getElementById('siteHeader');
 const tide = document.getElementById('tideProgress');
@@ -38,33 +40,75 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 /* ============================================
    MENU DATA
-   Prix indicatifs en DT — à ajuster selon vos tarifs réels.
    ============================================ */
 const MENU = {
-  grilles: [
-    { name:'Loup de mer grillé', desc:'Poisson entier grillé au feu de bois, citron et huile d\'olive', price:'Selon poids' },
-    { name:'Dorade royale grillée', desc:'Grillée entière, servie avec salade méchouia', price:'Selon poids' },
-    { name:'Poulpe grillé', desc:'Poulpe mariné, grillé et laqué à l\'huile d\'olive', price:'28 DT' },
-    { name:'Crevettes royales grillées', desc:'Grillées à l\'ail et au piment', price:'32 DT' },
-    { name:'Mixed grill du pêcheur', desc:'Sélection du jour, pour 2 personnes', price:'65 DT' },
+  salades: [
+    { name:'Salade méchouia', desc:'Poivrons et tomates grillés, thon, œuf', price:'10 DT' },
+    { name:'Salade tunisienne', desc:'Tomate, concombre, oignon, olives', price:'12 DT' },
+    { name:'Salade César', desc:'', price:'30 DT' },
+    { name:'Salade pêcheur', desc:'Fruits de mer', price:'32 DT' },
+    { name:'Salade trio Edlala', desc:'', price:'34 DT' },
   ],
-  fruitsdemer: [
-    { name:'Plateau de fruits de mer', desc:'Crevettes, calamars, moules, poisson du jour', price:'55 DT' },
-    { name:'Friture de calamars', desc:'Calamars frits, sauce tartare maison', price:'24 DT' },
-    { name:'Moules marinière', desc:'Moules fraîches, vin blanc, ail et persil', price:'20 DT' },
-    { name:'Gambas à l\'ail', desc:'Sautées à l\'huile d\'olive et piment', price:'34 DT' },
-  ],
-  tunisien: [
-    { name:'Couscous au poisson', desc:'Couscous traditionnel, poisson et légumes de saison', price:'22 DT' },
-    { name:'Ojja aux crevettes', desc:'Sauce tomate épicée, œuf poché, crevettes', price:'19 DT' },
-    { name:'Poisson au four à la tunisienne', desc:'Poisson mariné aux épices, cuit au four', price:'26 DT' },
-    { name:'Chapchouka aux fruits de mer', desc:'Poivrons, tomates mijotées, fruits de mer', price:'21 DT' },
+  plats: [
+    { name:'Escalope grillée', desc:'', price:'25 DT' },
+    { name:'Escalope panée', desc:'', price:'28 DT' },
+    { name:'Plat dorade', desc:'', price:'26 DT' },
+    { name:'Plat loup', desc:'', price:'29 DT' },
+    { name:'Suprême de poulet à la crème', desc:'', price:'30 DT' },
+    { name:'Filet de dorade sauce crevette', desc:'', price:'35 DT' },
+    { name:'Plat crevette grillée', desc:'', price:'38 DT' },
+    { name:'Plat crevette panée', desc:'', price:'39 DT' },
+    { name:'Plat saumon', desc:'', price:'40 DT' },
+    { name:'Plat mixte', desc:'Pour une personne', price:'47 DT' },
+    { name:'Saumon Edlala', desc:'', price:'49 DT' },
+    { name:'Plat saumon sauce crevette', desc:'', price:'49 DT' },
+    { name:'Fruits de mer sautés à l\'ail', desc:'', price:'52 DT' },
+    { name:'Chtar Chario', desc:'', price:'125 DT' },
+    { name:'Chario Edlala', desc:'', price:'198 DT' },
+    { name:'Chario Royale Extra Edlala', desc:'', price:'348 DT' },
   ],
   entrees: [
-    { name:'Salade méchouia', desc:'Poivrons et tomates grillés, thon, œuf', price:'9 DT' },
-    { name:'Brik à l\'œuf et thon', desc:'Feuille croustillante, cœur fondant', price:'6 DT' },
-    { name:'Salade tunisienne', desc:'Tomate, concombre, oignon, olives', price:'7 DT' },
-    { name:'Soupe de poisson', desc:'Recette du jour, croûtons et rouille', price:'10 DT' },
+    { name:'Brick au thon', desc:'', price:'6 DT' },
+    { name:'Brick crevette', desc:'', price:'8 DT' },
+    { name:'Plat frites', desc:'', price:'10 DT' },
+    { name:'Plat Mo9li', desc:'', price:'13 DT' },
+    { name:'Moules-frites', desc:'', price:'29 DT' },
+    { name:'Ojja fruits de mer', desc:'', price:'38 DT' },
+    { name:'Gratin fruits de mer', desc:'', price:'45 DT' },
+  ],
+  pates: [
+    { name:'Spaghetti putanesca', desc:'', price:'32 DT' },
+    { name:'Spaghetti bolognaise', desc:'', price:'35 DT' },
+    { name:'Spaghetti fruits de mer', desc:'', price:'42 DT' },
+    { name:'Tagliatelle fruits de mer sauce rosée', desc:'', price:'42 DT' },
+    { name:'Riz fruits de mer', desc:'', price:'44 DT' },
+    { name:'Spaghetti saumon sauce rosée', desc:'', price:'44 DT' },
+    { name:'Spaghetti aglio olio', desc:'Boutargue', price:'46 DT' },
+  ],
+  enfants: [
+    { name:'Plat nuggets', desc:'Menu enfant', price:'22 DT' },
+    { name:'Plat garniture 5amsa w 5mis', desc:'', price:'35 DT' },
+    { name:'Tabouna', desc:'', price:'3 DT' },
+  ],
+  desserts: [
+    { name:'1 boule de glace', desc:'', price:'5 DT' },
+    { name:'2 boules de glace', desc:'', price:'8 DT' },
+    { name:'Cheesecake au choix', desc:'', price:'10 DT' },
+    { name:'Salade de fruits de saison', desc:'', price:'10 DT' },
+  ],
+  boissons: [
+    { name:'Eau 1L', desc:'', price:'3 DT' },
+    { name:'Garsi', desc:'', price:'4 DT' },
+    { name:'Soda', desc:'', price:'4 DT' },
+    { name:'Café express', desc:'Capsule', price:'5 DT' },
+    { name:'Citronnade', desc:'', price:'6 DT' },
+    { name:'Schweppes', desc:'', price:'6 DT' },
+    { name:'Jus fraise', desc:'', price:'7 DT' },
+    { name:'Jus mangue', desc:'', price:'8 DT' },
+    { name:'Jus kiwi', desc:'', price:'8 DT' },
+    { name:'Citronnade aux amandes', desc:'', price:'8,5 DT' },
+    { name:'Celtia sans alcool', desc:'', price:'9 DT' },
+    { name:'Shark', desc:'', price:'10 DT' },
   ]
 };
 
@@ -77,17 +121,20 @@ function renderMenu(cat){
     const el = document.createElement('div');
     el.className = 'menu-item';
     el.style.animationDelay = (i * 0.06) + 's';
+    const orderMsg = encodeURIComponent(`Bonjour Edlala, je voudrais commander : ${item.name}`);
+    const descHtml = item.desc ? `<div class="menu-item-desc">${item.desc}</div>` : '';
     el.innerHTML = `
       <div>
         <div class="menu-item-name">${item.name}</div>
-        <div class="menu-item-desc">${item.desc}</div>
+        ${descHtml}
+        <a class="order-link" href="https://wa.me/${RESTAURANT_WHATSAPP}?text=${orderMsg}" target="_blank" rel="noopener">Commander →</a>
       </div>
       <div class="menu-item-price">${item.price}</div>
     `;
     grid.appendChild(el);
   });
 }
-renderMenu('grilles');
+renderMenu('salades');
 
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -101,14 +148,12 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 const track = document.getElementById('criee-track');
 function buildTicker(){
   const items = CATCH_OF_DAY.map(f => `<span>${f} <span class="dot">•</span></span>`).join('');
-  track.innerHTML = items + items; // duplicated for seamless loop
+  track.innerHTML = items + items;
 }
 buildTicker();
 
 /* ============================================
    GALLERY DATA
-   Remplacez les fichiers dans /images par vos vraies photos
-   en gardant les mêmes noms, ou changez les chemins ci-dessous.
    ============================================ */
 const GALLERY = [
   { src:'images/galerie-1.jpg', alt:'Plateau de fruits de mer', size:'wide' },
@@ -133,12 +178,7 @@ function renderGallery(){
 }
 renderGallery();
 
-/* ---------- Auto-detect real photos ----------
-   Any element with [data-bg] gets tested: if the file
-   exists, it becomes the background and the "photo
-   manquante" label disappears automatically. This means
-   you can just drop your real files into /images with the
-   matching names and refresh the page — no code to touch. */
+/* ---------- Auto-detect real photos ---------- */
 function loadPhotoSlots(){
   document.querySelectorAll('.photo-slot[data-bg]').forEach(el => {
     const src = el.dataset.bg;
@@ -154,8 +194,6 @@ function loadPhotoSlots(){
 loadPhotoSlots();
 
 /* ---------- Reservation form -> WhatsApp ---------- */
-const RESTAURANT_WHATSAPP = '21625035034'; // format international sans le +
-
 document.getElementById('reservationForm').addEventListener('submit', function(e){
   e.preventDefault();
   const name = document.getElementById('resName').value.trim();
