@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merci de votre visite — Edlala</title>
+<link rel="icon" type="image/jpeg" href="images/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Cairo:wght@500;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  body{
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background:var(--sea-deep); padding:1.5rem;
+  }
+  .review-card{
+    background:var(--sand); border-radius:8px; max-width:420px; width:100%;
+    padding:3rem 2rem; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.3);
+  }
+  .review-logo{ width:76px; height:76px; border-radius:50%; margin:0 auto 1.4rem; box-shadow:0 0 0 3px var(--rope); }
+  .review-stars{ font-size:1.8rem; color:var(--coral); letter-spacing:.2rem; margin-bottom:1rem; }
+  .review-card h1{
+    font-family:var(--font-display); font-weight:600; font-size:1.6rem;
+    color:var(--sea-ink); margin-bottom:.8rem; line-height:1.25;
+  }
+  .review-card p{ color:#5b5348; margin-bottom:2rem; font-size:.95rem; }
+  .review-btn{
+    display:inline-block; background:var(--coral); color:var(--white);
+    padding:1rem 2rem; border-radius:6px; font-weight:600; font-size:1rem;
+    width:100%; box-sizing:border-box; transition:background .2s, transform .2s;
+  }
+  .review-btn:hover{ background:var(--coral-dim); transform:translateY(-2px); }
+  .review-footer{ margin-top:1.6rem; font-size:.8rem; color:#8a8175; }
+  .review-footer a{ color:var(--sea-light); font-weight:600; }
+</style>
+</head>
+<body>
+
+  <div class="review-card">
+    <img src="images/logo.jpg" alt="Edlala" class="review-logo">
+    <div class="review-stars">★★★★★</div>
+    <h1>Merci d'être venu chez Edlala !</h1>
+    <p>Votre avis nous aide énormément et prend 30 secondes. Un grand merci d'avance 🐟</p>
+    <a class="review-btn" href="https://search.google.com/local/writereview?placeid=ChIJpfZEdACfAhMRH4kSJ8sdhwc" target="_blank" rel="noopener">
+      ⭐ Laisser un avis Google
+    </a>
+    <div class="review-footer">
+      Une question ? <a href="https://wa.me/21625035034" target="_blank" rel="noopener">Écrivez-nous sur WhatsApp</a>
+    </div>
+  </div>
+
+</body>
+</html>
