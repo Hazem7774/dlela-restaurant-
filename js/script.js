@@ -134,12 +134,12 @@ function renderMenu(cat){
         <span class="img-fallback menu-fallback">${icon}</span>
       </div>
       <div class="menu-item-body">
-        <div>
+        <div class="menu-item-top">
           <div class="menu-item-name">${item.name}</div>
-          ${descHtml}
-          <a class="order-link" href="https://wa.me/${RESTAURANT_WHATSAPP}?text=${orderMsg}" target="_blank" rel="noopener">Commander →</a>
+          <div class="menu-item-price">${item.price}</div>
         </div>
-        <div class="menu-item-price">${item.price}</div>
+        ${descHtml}
+        <a class="order-link" href="https://wa.me/${RESTAURANT_WHATSAPP}?text=${orderMsg}" target="_blank" rel="noopener">Commander →</a>
       </div>
     `;
     grid.appendChild(el);
