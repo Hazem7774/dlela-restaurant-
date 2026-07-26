@@ -407,7 +407,6 @@ section{ position:relative; }
   .about{ grid-template-columns:1fr; }
   .about-photo{ box-shadow:8px 8px 0 var(--rope); max-width:360px; }
   .menu-grid{ grid-template-columns:1fr; }
-  .gallery-grid{ grid-template-columns:repeat(2, 1fr); grid-auto-rows:160px; }
   .reservation-inner{ grid-template-columns:1fr; }
   .contact-grid{ grid-template-columns:repeat(2, 1fr); }
 
@@ -424,8 +423,6 @@ section{ position:relative; }
 }
 
 @media (max-width: 560px){
-  .gallery-grid{ grid-template-columns:1fr; }
-  .gallery-item.wide, .gallery-item.tall{ grid-column:span 1; grid-row:span 1; }
   .contact-grid{ grid-template-columns:1fr; }
   .form-row-split{ flex-direction:column; }
 }
