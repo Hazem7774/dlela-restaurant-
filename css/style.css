@@ -201,6 +201,11 @@ section{ position:relative; }
   position:relative;
   background-color:#0a2f47;
 }
+.hero-video{
+  display:flex; align-items:center; justify-content:center;
+  padding:2rem;
+}
+.hero-video iframe, .hero-video blockquote{ max-width:100%; }
 
 /* ============ CRIEE TICKER (signature element) ============ */
 .criee{
@@ -381,8 +386,8 @@ section{ position:relative; }
 /* ============ RESPONSIVE ============ */
 @media (max-width: 900px){
   .hero{ grid-template-columns:1fr; }
-  .hero-image{ min-height:280px; order:-1; }
-  .hero-content{ padding:7rem 1.6rem 3rem; }
+.hero-video{ min-height:280px; order:-1; }
+   .hero-content{ padding:7rem 1.6rem 3rem; }
   .about{ grid-template-columns:1fr; }
   .about-photo{ box-shadow:8px 8px 0 var(--rope); max-width:360px; }
   .menu-grid{ grid-template-columns:1fr; }
