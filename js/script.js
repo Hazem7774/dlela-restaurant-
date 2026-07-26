@@ -164,31 +164,102 @@ function buildTicker(){
 }
 buildTicker();
 
+
 /* ============================================
-   GALLERY DATA
+   GALLERY CAROUSEL — stacked, draggable cards
+   Vanilla JS/CSS version (no React/build step needed)
    ============================================ */
 const GALLERY = [
-  { src:'images/galerie-1.jpg', alt:'Plateau de fruits de mer', size:'wide' },
-  { src:'images/galerie-2.jpg', alt:'Poisson grillé', size:'' },
-  { src:'images/galerie-3.jpg', alt:'Poissonnerie, étal du jour', size:'tall' },
-  { src:'images/galerie-4.jpg', alt:'Salle du restaurant', size:'' },
-  { src:'images/galerie-5.jpg', alt:'Crevettes grillées', size:'' },
-  { src:'images/galerie-6.jpg', alt:'Terrasse en bord de mer', size:'wide' },
+  { src:'images/galerie-1.jpg', alt:'Plateau de fruits de mer' },
+  { src:'images/galerie-2.jpg', alt:'Poisson grillé' },
+  { src:'images/galerie-3.jpg', alt:'Poissonnerie, étal du jour' },
+  { src:'images/galerie-4.jpg', alt:'Salle du restaurant' },
+  { src:'images/galerie-5.jpg', alt:'Crevettes grillées' },
+  { src:'images/galerie-6.jpg', alt:'Terrasse en bord de mer' },
 ];
 
+let carouselProgress = 0;
+let dragStartProgress = 0;
+let dragStartX = 0;
+let isDragging = false;
+let carouselCards = [];
+
+function carouselConfig(){
+  const w = window.innerWidth;
+  if (w < 640) return { x:70, y:14, rot:8, scale:.08, sensitivity:180 };
+  if (w < 1024) return { x:100, y:22, rot:10, scale:.10, sensitivity:220 };
+  return { x:130, y:28, rot:12, scale:.12, sensitivity:250 };
+}
+
 function renderGallery(){
-  const grid = document.getElementById('galleryGrid');
-  grid.innerHTML = '';
-  GALLERY.forEach(g => {
+  const track = document.getElementById('carouselTrack');
+  track.innerHTML = '';
+  carouselCards = GALLERY.map((g, i) => {
     const el = document.createElement('div');
-    el.className = 'gallery-item photo-slot ' + g.size;
+    el.className = 'carousel-card photo-slot';
     el.dataset.bg = g.src;
     el.innerHTML = `<span class="img-fallback">📷 ${g.src}</span>`;
-    grid.appendChild(el);
+    track.appendChild(el);
+    return el;
   });
   loadPhotoSlots();
+  updateCarousel(false);
 }
 renderGallery();
+
+function updateCarousel(animate){
+  const n = GALLERY.length;
+  const cfg = carouselConfig();
+  carouselCards.forEach((el, i) => {
+    let diff = (i - carouselProgress) % n;
+    if (diff > n/2) diff -= n;
+    if (diff < -n/2) diff += n;
+
+    const absDiff = Math.abs(diff);
+    const x = diff * cfg.x;
+    const rot = absDiff < 0.05 ? 0 : diff * cfg.rot;
+    const y = absDiff < 0.05 ? 0 : absDiff * cfg.y;
+    const scale = 1 - absDiff * cfg.scale;
+    let opacity = 1 - Math.max(0, absDiff - 1.5) / (n/2 - 1.5);
+    opacity = Math.max(0, Math.min(1, opacity));
+    const z = Math.round(100 - absDiff * 10);
+
+    el.style.transition = animate ? 'transform .5s cubic-bezier(.22,.61,.36,1), opacity .5s' : 'none';
+    el.style.transform = `translate(-50%,-50%) translateX(${x}px) translateY(${y}px) rotate(${rot}deg) scale(${scale})`;
+    el.style.opacity = opacity;
+    el.style.zIndex = z;
+  });
+}
+
+const dragSurface = document.getElementById('carouselDrag');
+
+function pointerDown(e){
+  isDragging = true;
+  dragStartProgress = carouselProgress;
+  dragStartX = (e.touches ? e.touches[0].clientX : e.clientX);
+}
+function pointerMove(e){
+  if(!isDragging) return;
+  const x = (e.touches ? e.touches[0].clientX : e.clientX);
+  const delta = x - dragStartX;
+  const cfg = carouselConfig();
+  carouselProgress = dragStartProgress - delta / cfg.sensitivity;
+  updateCarousel(false);
+}
+function pointerUp(){
+  if(!isDragging) return;
+  isDragging = false;
+  carouselProgress = Math.round(carouselProgress);
+  updateCarousel(true);
+}
+
+dragSurface.addEventListener('mousedown', pointerDown);
+window.addEventListener('mousemove', pointerMove);
+window.addEventListener('mouseup', pointerUp);
+dragSurface.addEventListener('touchstart', pointerDown, { passive:true });
+window.addEventListener('touchmove', pointerMove, { passive:true });
+window.addEventListener('touchend', pointerUp);
+window.addEventListener('resize', () => updateCarousel(false));
 
 /* ---------- Auto-detect real photos ---------- */
 function loadPhotoSlots(){
